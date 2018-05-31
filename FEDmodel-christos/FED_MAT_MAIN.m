@@ -200,7 +200,7 @@ pCO2ref=5;    %Choose the percentage the reference CO2 to determine reference CO
               %[this value can be changed depending on how the CO2 peak is defined]
               
 % calculate new values
-NEW_data=1;
+NEW_data=0;
 
 while NEW_data==1
     get_CO2PE_FED;   %this routine calculates the CO2 and PE factors of the external grid also    
@@ -225,8 +225,10 @@ while NEW_data==0
 
     load el_exGCO2F;
     load el_exGPEF;
-    load DH_CO2F;
-    load DH_PEF;
+    %load DH_CO2F;
+    %load DH_PEF;
+    DH_CO2F=xlsread('Input_data_FED_SIMULATOR\Produktionsdata fjärrvärme marginal.xlsx', 'x5:x10204');
+    DH_PEF=xlsread('Input_data_FED_SIMULATOR\Produktionsdata fjärrvärme marginal.xlsx', 'y5:y10204');
     break;
 end
 
@@ -439,7 +441,7 @@ wgdx('MtoG.gdx', temp_opt_fx_inv,temp_opt_fx_inv_RMMC,temp_opt_fx_inv_AbsCInv,te
 
  RUN_GAMS_MODEL = 1;
  while RUN_GAMS_MODEL==1
-     system 'gams FED_SIMULATOR_MAIN lo=3';
+     system 'C:\GAMS\win64\24.9\gams FED_SIMULATOR_MAIN lo=3';
      break;
  end
  %% Post processing results 

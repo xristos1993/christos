@@ -19,7 +19,7 @@ while PROCESS_RESULTS==1
     gdxData=strcat(path,file_name);       
     %% Get parameters and variables from a GDX file 
         
-    PROCESS_DATA = 0;
+    PROCESS_DATA = 1;
     while PROCESS_DATA==1
     %% Assign uels
     

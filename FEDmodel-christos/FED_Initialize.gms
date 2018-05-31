@@ -105,7 +105,7 @@ scalar
 * Source for these numbers?
 scalar
          AbsC_COP Coefficent of performance of AbsC /0.5/
-         AbsH_COP       Coeffiicent of performance for absorption heating investment /1.7/
+
 *AbsC_eff Efficiency of AbsC /0.95/
 ;
 

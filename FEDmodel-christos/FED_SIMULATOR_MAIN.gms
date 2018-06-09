@@ -5,9 +5,7 @@
 $Include FED_Initialize
 $Include FED_Variables
 $Include FED_Equations
-
 *CASE WITH HP TES MICRO-CHP AND EXCHANGE WITHIN BUILDINGS**************
-
 option reslim = 500000;
 * Default 0.10 , +- 10% from optimal
 option optcr = 0.001;
@@ -79,7 +77,7 @@ AH_h_imp_tot=sum(h,h_imp_AH.l(h));
 AH_h_exp_tot=sum(h,h_exp_AH.l(h));
 
 execute_unload 'GtoM' min_totCost, min_totPE, min_totCO2,
-                      el_demand, h_demand, c_demand, c_demand_AH,
+                      el_demand, el_demand_nonAH, h_demand, c_demand, c_demand_AH,
                       e_imp_AH, e_exp_AH, e_imp_nonAH,AH_el_imp_tot, AH_el_exp_tot,
                       h_imp_AH, h_exp_AH, h_imp_nonAH, AH_h_imp_tot, AH_h_exp_tot,
                       C_DC,
@@ -104,7 +102,8 @@ execute_unload 'GtoM' min_totCost, min_totPE, min_totCO2,
                       fix_cost, utot_cost, price, fuel_cost, var_cost, en_tax, cost_inv_opt, lifT_inv_opt,
                       totCost, Ainv_cost, fix_cost_existing, fix_cost_new, var_cost_existing, var_cost_new,
                       DH_export_season, P1P2_dispatchable, inv_lim
-                      c_RMInv, e_RMInv, RMInv_cap, invCost_RMInv,
+                      c_RMInv, e_RMInv, RMInv_cap, invCost_RMInv,BFCh_en,BFCh_ch,
+                      BES_reac,BFCh_reac,BFCh_dis,e_existPV_reac,e_existPV_act,e_TURB_reac,e_PV_reac_roof,e_PV_act_roof,
                       model_status;
 
 execute_unload 'h' h;

@@ -61,6 +61,8 @@ AAC_cap.fx = cap_sup_unit('AAC');
 *----------------existing PV----------------------------------------------------
 positive variable
          e_existPV(h)    electricity output of existing PV
+         e_existPV_act(h,BID) active power output of existing PVs
+         e_existPV_reac(h,BID) reactive power output of existing PVs
 ;
 
 ******************New investments***********************************************
@@ -99,6 +101,7 @@ positive variable
          e_TURB(h)         electricity generated in turbine-gen
          h_TURB(h)         steam demand in turbine
          H_P2T(h)          steam generated in P2-turb combo
+         e_TURB_reac(h)    Turbines reactive power
 ;
 binary variable
          B_TURB            Decision variable for turbine investment
@@ -144,9 +147,6 @@ variable
 binary variable
          B_BITES(i)       Decision variable weither to invest BITES control sys-
 ;
-*Buildings with no BITES capability
-B_BITES.fx(i)=0;
-B_BITES.fx(BITES_Inv)=1;
 
 *----------------Building Advanced Control (BAC) related------------------------
 positive variable
@@ -164,17 +164,27 @@ positive variable
          e_PV(h)            electricity produced by PV
          PV_cap_roof(BID)   capacity of solar modules on roof
          PV_cap_facade(BID) capacity of solar modules on facade
+         e_PV_reac_roof(h,BID)      PVs reactive power
+         e_PV_act_roof(h,BID)      PVs active power
 ;
-
+PV_cap_roof.fx(BID)=0;
+PV_cap_facade.fx(BID)=0;
+PV_cap_roof.fx(PV_BID_roof_Inv) $ (opt_fx_inv eq 1) = PV_roof_cap_Inv(PV_BID_roof_Inv);
+PV_cap_facade.fx(PV_BID_facade_Inv) $ (opt_fx_inv eq 1) = PV_facade_cap_Inv(PV_BID_facade_Inv);
 *------------------Battery related----------------------------------------------
 positive variables
-         BES_en(h)       Energy stored in the battry at time t and building i
+         BES_en                                                                                                                                                                                                          (h)       Energy stored in the battry at time t and building i
          BES_ch(h)       Battery charing at time t and building i
          BES_dis(h)      Battery discharging at time t and building i
          BES_cap         Capacity of the battery at building i
-;
-BES_cap.fx $ (opt_fx_inv eq 1 and opt_fx_inv_BES eq 1) = 0 * opt_fx_inv_BES_cap;
 
+         BFCh_en                                                                                                                                                                                                          (h)       Energy stored in the battry at time t and building i
+         BFCh_ch(h)       Battery charing at time t and building i
+         BFCh_dis(h)      Battery discharging at time t and building i
+         BFCh_cap         Capacity of the battery at building i
+;
+BES_cap.fx $ (opt_fx_inv eq 1 and opt_fx_inv_BES eq 1) = opt_fx_inv_BES_cap;
+BFCh_cap.fx $ (opt_fx_inv eq 1 and opt_fx_inv_BFCh eq 1) = opt_fx_inv_BFCh_cap;
 *------------------Refrigeration machine investment related---------------------
 positive variable
          c_RMInv(h)           cooling power available from RMInv
@@ -187,10 +197,17 @@ positive variable
          e_exp_AH(h)        Exported electricty from the AH system
          e_imp_AH(h)        Imported electricty to the AH system
          e_imp_nonAH(h)     Imported electricty to the AH system
+         V(h,Bus_IDs)       Voltage magnitudes of EL Grid
 ;
 e_imp_AH.up(h)=exG_max_cap;
 e_exp_AH.up(h)=exG_max_cap;
 
+variable
+        re_imp_AH(h)        Imported reactive to the AH system
+        delta(h,Bus_IDs)    Voltage angles of EL Grid
+        BES_reac(h)         BES reactive power
+        BFCh_reac(h)        BFCh reactive power
+;
 *------------------Grid DH related----------------------------------------------
 positive variable
          h_exp_AH(h)        Exported heat from the AH system

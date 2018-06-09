@@ -274,6 +274,8 @@ scalar
 scalar
          BES_ch_eff    Charging efficiency /0.95/
          BES_dis_eff   Discharding efficiency /0.95/
+         BFCh_ch_eff    Charging efficiency /0.95/
+         BFCh_dis_eff   Discharding efficiency /0.95/
 ;
 
 *--------------set building energy demands--------------------------------------

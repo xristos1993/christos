@@ -2,7 +2,7 @@
 *----------------------------Define equations-----------------------------------
 ********************************************************************************
 equation
-           eq_VKA11     heating generation of VKA1
+           eq_VKA11     heating generatin of VKA1
            eq_VKA12     cooling generation of VKA1
            eq_VKA13     maximum electricity usage by VKA1
            eq_VKA41     heating generation of VKA4
@@ -107,7 +107,7 @@ equation
            eq_PV_reactive1  Reactive power limit of Pvs
            eq_PV_reactive2  Reactive power limit of Pvs
            eq_PV_reactive3  Reactive power limit of Pvs
-           eq_PV_reactive4  Reactive power limit of Pvs 
+           eq_PV_reactive4  Reactive power limit of Pvs
 
            eq_RMInv1     cooling production from RMInv
            eq_RMInv2     capacity determination of RMInv

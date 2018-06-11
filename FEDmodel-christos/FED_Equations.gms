@@ -2,7 +2,7 @@
 *----------------------------Define equations-----------------------------------
 ********************************************************************************
 equation
-           eq_VKA11     heating generation of VKA1
+           eq_VKA11     heating generatin of VKA1
            eq_VKA12     cooling generation of VKA1
            eq_VKA13     maximum electricity usage by VKA1
            eq_VKA41     heating generation of VKA4
@@ -48,7 +48,9 @@ equation
            eq1_TURB     production equation for turbine-gen
            eq2_TURB     energy consumption equation for turbine-gen
            eq3_TURB     investment equation for turbine-gen
-           eq4_TURB     reactive power limits of turbine
+           eq4_TURB     active-reactive power limits of turbine
+           eq5_TURB     active-reactive power limits of turbine
+           eq6_TURB     active-reactive power limits of turbine
 
            eq_HP1       heat production from HP
            eq_HP2       cooling production from HP
@@ -107,7 +109,7 @@ equation
            eq_PV_reactive1  Reactive power limit of Pvs
            eq_PV_reactive2  Reactive power limit of Pvs
            eq_PV_reactive3  Reactive power limit of Pvs
-           eq_PV_reactive4  Reactive power limit of Pvs 
+           eq_PV_reactive4  Reactive power limit of Pvs
 
            eq_RMInv1     cooling production from RMInv
            eq_RMInv2     capacity determination of RMInv
@@ -261,6 +263,8 @@ eq3_TURB(h)..
          e_TURB(h) =l= B_TURB * TURB_cap;
 
 eq4_TURB(h)..e_TURB_reac(h)=l=0.4843*e_TURB(h);
+eq5_TURB(h)..-0.58*e_TURB_reac(h)+e_TURB(h)=l=1.15*TURB_cap;
+eq6_TURB(h)..+0.58*e_TURB_reac(h)+e_TURB(h)=l=1.15*TURB_cap;
 
 *----------------HP equations --------------------------------------------------
 eq_HP1(h)..
@@ -332,12 +336,12 @@ eq_BES_dis(h)..
 
 eq_BES_reac1(h)..BES_reac(h)=l=opt_fx_inv_BES_maxP;
 eq_BES_reac2(h)..BES_reac(h)=g=-opt_fx_inv_BES_maxP;
-eq_BES_reac3(h)..BES_ch(h)+BES_dis(h)=g=-opt_fx_inv_BES_maxP;
-eq_BES_reac4(h)..BES_ch(h)+BES_dis(h)=l=opt_fx_inv_BES_maxP;
-eq_BES_reac5(h)..-0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
-eq_BES_reac6(h)..-0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
-eq_BES_reac7(h)..0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
-eq_BES_reac8(h)..0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac3(h)..-BES_ch(h)+BES_dis(h)=g=-opt_fx_inv_BES_maxP;
+eq_BES_reac4(h)..-BES_ch(h)+BES_dis(h)=l=opt_fx_inv_BES_maxP;
+eq_BES_reac5(h)..-0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac6(h)..-0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac7(h)..0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac8(h)..0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
 *-----------------Battery Fast Charge constraints-------------------------------------------
 eq_BFCh1(h) $ (ord(h) eq 1)..
              BFCh_en(h)=e= opt_fx_inv_BFCh_init;

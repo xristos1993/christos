@@ -103,7 +103,7 @@ execute_unload 'GtoM' min_totCost, min_totPE, min_totCO2,
                       totCost, Ainv_cost, fix_cost_existing, fix_cost_new, var_cost_existing, var_cost_new,
                       DH_export_season, P1P2_dispatchable, inv_lim
                       c_RMInv, e_RMInv, RMInv_cap, invCost_RMInv,BFCh_en,BFCh_ch,
-                      BES_reac,BFCh_reac,BFCh_dis,e_existPV_reac,e_existPV_act,e_TURB_reac,e_PV_reac_roof,e_PV_act_roof,
+                      BES_reac,BFCh_reac,BFCh_dis,e_existPV_reac,e_existPV_act,e_TURB_reac,e_PV_reac_roof,e_PV_act_roof,e_TURB_reac,
                       model_status;
 
 execute_unload 'h' h;

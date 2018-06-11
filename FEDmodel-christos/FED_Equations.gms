@@ -332,12 +332,12 @@ eq_BES_dis(h)..
 
 eq_BES_reac1(h)..BES_reac(h)=l=opt_fx_inv_BES_maxP;
 eq_BES_reac2(h)..BES_reac(h)=g=-opt_fx_inv_BES_maxP;
-eq_BES_reac3(h)..BES_ch(h)+BES_dis(h)=g=-opt_fx_inv_BES_maxP;
-eq_BES_reac4(h)..BES_ch(h)+BES_dis(h)=l=opt_fx_inv_BES_maxP;
-eq_BES_reac5(h)..-0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
-eq_BES_reac6(h)..-0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
-eq_BES_reac7(h)..0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
-eq_BES_reac8(h)..0.58*BES_reac(h)+BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac3(h)..-BES_ch(h)+BES_dis(h)=g=-opt_fx_inv_BES_maxP;
+eq_BES_reac4(h)..-BES_ch(h)+BES_dis(h)=l=opt_fx_inv_BES_maxP;
+eq_BES_reac5(h)..-0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac6(h)..-0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac7(h)..0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=l=1.15*opt_fx_inv_BES_maxP;
+eq_BES_reac8(h)..0.58*BES_reac(h)-BES_ch(h)+BES_dis(h)=g=-1.15*opt_fx_inv_BES_maxP;
 *-----------------Battery Fast Charge constraints-------------------------------------------
 eq_BFCh1(h) $ (ord(h) eq 1)..
              BFCh_en(h)=e= opt_fx_inv_BFCh_init;

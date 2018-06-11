@@ -50,7 +50,7 @@ equation
            eq3_TURB     investment equation for turbine-gen
            eq4_TURB     active-reactive power limits of turbine
            eq5_TURB     active-reactive power limits of turbine
-           eq6_TURB     active-reactive power limits of turbine
+           eq6_TURB     active-reactive power limits of turbin
 
            eq_HP1       heat production from HP
            eq_HP2       cooling production from HP

@@ -360,7 +360,7 @@ temp_optn3 = struct('name','min_totCO2','type','parameter','form','full','val',o
 
 %SIMULATION START AND STOP TIME
 sim_start=1445;
-sim_stop=1445;%10202;
+sim_stop=2165;
 forcast_horizon=10;
 t_len_m=10;
 
@@ -486,7 +486,11 @@ for t=sim_start:sim_stop
     PEF_DH.uels=h_sim.uels;
     
     %Initial SoC of different storage systems (1=BTES_D, 2=BTES_S, 3=TES, 4=BFCh, 5=BES)
+    if t==1445 
+        Initial(1:5)=0;
+    else
     Initial=readGtoM(t);
+    end
     
     opt_fx_inv_BES_init=Initial(5);
     temp_opt_fx_inv_BES_init = struct('name','opt_fx_inv_BES_init','type','parameter','form','full','val',opt_fx_inv_BES_init);
@@ -526,7 +530,7 @@ wgdx('MtoG.gdx', temp_opt_fx_inv,temp_opt_fx_inv_RMMC,...
 
  RUN_GAMS_MODEL = 1;
  while RUN_GAMS_MODEL==1
-     system 'gams FED_SIMULATOR_MAIN lo=3';
+     system 'C:\GAMS\win64\24.9\gams FED_SIMULATOR_MAIN lo=3';
      break;
  end
  
